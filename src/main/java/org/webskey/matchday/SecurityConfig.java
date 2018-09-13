@@ -1,5 +1,7 @@
 package org.webskey.matchday;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.webskey.matchday.services.LoginDetailsService;
 
 @Configuration
@@ -16,6 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private LoginDetailsService loginDetailsService;
+	
+	@Autowired
+	private DataSource dataSource;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -39,6 +46,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().formLogin()
 		.loginPage("/login").permitAll()
 		.and()  
-		.logout();
+		.logout()
+		.and()
+		.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository())
+	    .and()
+	    .csrf().disable();
 	}
+	
+	@Bean
+	  public PersistentTokenRepository tokenRepository() {
+	    JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl=new JdbcTokenRepositoryImpl();
+	    jdbcTokenRepositoryImpl.setDataSource(dataSource);
+	    return jdbcTokenRepositoryImpl;
+	  }
 }
