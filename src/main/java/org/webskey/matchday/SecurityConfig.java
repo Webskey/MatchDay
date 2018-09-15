@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private LoginDetailsService loginDetailsService;
-	
+
 	@Autowired
 	private DataSource dataSource;
 
@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
-		.antMatchers("/acces").access("hasRole('ROLE_USER')")
+		.antMatchers("/acces").access("hasRole('ROLE_ADMIN')")
 		.and()
 		.exceptionHandling().accessDeniedPage("/403")
 		.and().formLogin()
@@ -49,14 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logout()
 		.and()
 		.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository())
-	    .and()
-	    .csrf().disable();
+		.and()
+		.csrf().disable();
 	}
-	
+
 	@Bean
-	  public PersistentTokenRepository tokenRepository() {
-	    JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl=new JdbcTokenRepositoryImpl();
-	    jdbcTokenRepositoryImpl.setDataSource(dataSource);
-	    return jdbcTokenRepositoryImpl;
-	  }
+	public PersistentTokenRepository tokenRepository() {
+		JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl=new JdbcTokenRepositoryImpl();
+		jdbcTokenRepositoryImpl.setDataSource(dataSource);
+		return jdbcTokenRepositoryImpl;
+	}
 }

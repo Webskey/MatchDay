@@ -1,12 +1,10 @@
 package org.webskey.matchday.controllers;
 
-import java.security.Principal;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller	
-public class HomeControler {
+public class HomeController {
 
 	@RequestMapping("/")
 	public String home() {	
@@ -14,8 +12,7 @@ public class HomeControler {
 	}
 
 	@RequestMapping("/acces")
-	public String acces(Principal prrinc) {
-		System.out.println(prrinc.getName());
+	public String acces() {		
 		return "acces";
 	}
 }

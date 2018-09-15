@@ -1,0 +1,12 @@
+2018-09-14 23:42:56.907 [http-nio-8080-exec-9] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [128] milliseconds.
+2018-09-14 23:45:10.368 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@7f262bfa (No operations allowed after connection closed.)
+2018-09-14 23:45:10.388 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@43d9faf3 (No operations allowed after connection closed.)
+2018-09-14 23:45:10.391 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@d6e7089 (No operations allowed after connection closed.)
+2018-09-14 23:45:10.396 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@c0d5cf7 (No operations allowed after connection closed.)
+2018-09-14 23:45:10.398 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@5f6219c7 (No operations allowed after connection closed.)
+2018-09-14 23:45:10.400 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@53e07eba (No operations allowed after connection closed.)
+2018-09-14 23:45:10.402 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@2df4b677 (No operations allowed after connection closed.)
+2018-09-14 23:45:10.403 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@4bf8bdda (No operations allowed after connection closed.)
+2018-09-14 23:45:10.407 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@41b2943 (No operations allowed after connection closed.)
+2018-09-14 23:45:10.410 [http-nio-8080-exec-3] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.jdbc.JDBC4Connection@54de82d4 (No operations allowed after connection closed.)
+2018-09-14 23:45:14.426 [http-nio-8080-exec-1] WARN  org.webskey.matchday.controllers.HomeController - User: user was trying to get acces restricted page
