@@ -18,11 +18,15 @@ public class RegisterService {
 	@Autowired
 	private UsersRolesDao usersRolesDao;
 	
-	public void saveUser(UsersDto usersDto) {		
+	public void saveUser(UsersDto usersDto) throws Exception {		
+		
+		if(isUsernameExisting(usersDto.getUsername()) || isEmailExisting(usersDto.getEmail()))
+			throw new Exception();
 		
 		UsersEntity usersEntity = new UsersEntity();
 		usersEntity.setUsername(usersDto.getUsername());
 		usersEntity.setPassword(encodePassword(usersDto.getPassword()));
+		usersEntity.setEmail(usersDto.getEmail());
 		usersDao.save(usersEntity);
 		
 		UsersRolesEntity usersRolesEntity = new UsersRolesEntity();
@@ -36,5 +40,13 @@ public class RegisterService {
 	private String encodePassword(String password) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return passwordEncoder.encode(password);
+	}
+	
+	private boolean isUsernameExisting(String username) {		
+		return usersDao.findByUsername(username).isPresent();
+	}
+	
+	private boolean isEmailExisting(String email) {		
+		return usersDao.findByEmail(email).isPresent();
 	}
 }

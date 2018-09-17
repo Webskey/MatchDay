@@ -1,14 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>403</title>
+<title>Login page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+	<header th:replace="layouts/header :: header"></header>
+	<h1>Login</h1>
 
-	<h4>Login Form</h4>
-
+	<p th:if="${loginError}">Wrong user or password</p>
 	<form th:action="@{/login}" method="post">
+
 		<table>
 			<tr>
 				<td>Username</td>

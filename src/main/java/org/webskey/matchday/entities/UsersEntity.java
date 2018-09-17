@@ -28,6 +28,9 @@ public class UsersEntity {
 
 	@Column
 	private String password;
+	
+	@Column
+	private String email;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usersEntity")
 	private List<UsersRolesEntity> usersRoles = new ArrayList<>();

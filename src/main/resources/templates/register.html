@@ -1,25 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>403</title>
+<title>Register Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<style>
-.error {
-	color: #ff0000;
-}
-
-.errorblock {
-	color: #000;
-	background-color: #ffEEEE;
-	border: 3px solid #ff0000;
-	padding: 8px;
-	margin: 16px;
-}
-</style>
 <body>
+	<header th:replace="layouts/header :: header"></header>
+	<h2>Register</h2>
 
-	<h2>HTML Forms</h2>
+	<div th:errors="${user}">Error register</div>
 
 	<form th:object="${user}" th:action="@{/reg}" method="post">
 		<table>
@@ -33,8 +22,14 @@
 				<td>Password</td>
 				<td><input type="password" th:field="*{password}"
 					name="password" /></td>
-				<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error
-					Error</td>
+				<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
+					error Error</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="text" th:field="*{email}" name="email" /></td>
+				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
+					error Error</td>
 			</tr>
 			<tr>
 				<td><button type="submit">Submit</button></td>

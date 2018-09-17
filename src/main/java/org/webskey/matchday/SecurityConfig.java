@@ -40,11 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
-		.antMatchers("/acces").access("hasRole('ROLE_ADMIN')")
+		.antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
 		.and()
 		.exceptionHandling().accessDeniedPage("/403")
 		.and().formLogin()
 		.loginPage("/login").permitAll()
+		.failureUrl("/login-error")
 		.and()  
 		.logout()
 		.and()
