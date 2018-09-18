@@ -33,5 +33,5 @@ public class UsersEntity {
 	private String email;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usersEntity")
-	private List<UsersRolesEntity> usersRoles = new ArrayList<>();
+	private List<UsersRolesEntity> usersRoles;
 }
