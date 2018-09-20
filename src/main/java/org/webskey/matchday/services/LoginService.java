@@ -11,7 +11,7 @@ import org.webskey.matchday.dao.UsersDao;
 import org.webskey.matchday.entities.UsersEntity;
 
 @Service
-public class LoginDetailsService implements UserDetailsService {
+public class LoginService implements UserDetailsService {
 
 	@Autowired
 	private UsersDao usersDao;

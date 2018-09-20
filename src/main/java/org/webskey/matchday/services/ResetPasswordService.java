@@ -11,12 +11,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.webskey.matchday.dao.ResetPasswordDao;
 import org.webskey.matchday.dao.UsersDao;
 import org.webskey.matchday.dto.UsersDto;
 import org.webskey.matchday.entities.ResetPasswordEntity;
 import org.webskey.matchday.entities.UsersEntity;
+import org.webskey.matchday.mailmessages.ResetPasswordMessage;
 
 @Service
 public class ResetPasswordService {
@@ -29,43 +31,58 @@ public class ResetPasswordService {
 
 	@Autowired
 	private ResetPasswordDao resetPasswordDao;
+	
+	private UsersEntity user;
+	
+	public UsersEntity getUser() {
+		return this.user;
+	}
 
 	public void resetPassword(UsersDto usersDto, String url) throws ArithmeticException {
 		Optional<UsersEntity> user = usersDao.findByEmail(usersDto.getEmail());		
 		if(!user.isPresent())
 			throw new ArithmeticException();
-
+		
 		createToken(user.get(), url);
 	}
 
-	public void createToken(UsersEntity user, String url) {
-		UUID uuid = UUID.randomUUID();
+	private void createToken(UsersEntity user, String url) {
+		String token = UUID.randomUUID().toString();
+		String link = url + "/" + user.getUsername() + "/" + token;
+		System.out.println(link);
 
 		ResetPasswordEntity rpe = new ResetPasswordEntity();
 		rpe.setUsername(user.getUsername());
-		rpe.setToken(uuid.toString());
+		rpe.setToken(token);
 		rpe.setDate(new Date());
 
 		resetPasswordDao.save(rpe);
 		
-		constructAndSendEmail(user, url, uuid.toString());
+		constructAndSendEmail(user, link);
 	}
 	
-	public void constructAndSendEmail(UsersEntity user, String url, String token) {
-		String urlToReset = url + "/" + user.getUsername() + "/" + token;
-		System.out.println(urlToReset);
+	private void constructAndSendEmail(UsersEntity user, String link) {		
+		emailService.sendHtmlEmail(new ResetPasswordMessage(user, link));
 	}
 
-	public boolean checkLink(String username, String token) {
+	public String checkLink(String username, String token) {
 		Optional<ResetPasswordEntity> rpeO = resetPasswordDao.findById(username);
-		if(!rpeO.isPresent()) return false;
-		
+		if(!rpeO.isPresent()) return "Given username in link doesnt exists";
+			
 		ResetPasswordEntity rpe = rpeO.get();
-		if(!rpe.getToken().equals(token)) return false;
+		if(!rpe.getToken().equals(token)) return "Incorrect token";
 		
 		long hoursSinceTokenSent = TimeUnit.MILLISECONDS.toHours(new Date().getTime() - rpe.getDate().getTime());
-		if(hoursSinceTokenSent > 24) return false;
+		if(hoursSinceTokenSent > 24) return "Token expired";		
 		
-		return true;
+		Optional<UsersEntity> user = usersDao.findByUsername(username);
+		this.user = user.get();
+		
+		return "ok";
+	}
+	
+	public void changePassword(UsersDto usersDto) {
+		user.setPassword(new BCryptPasswordEncoder().encode(usersDto.getPassword()));
+		usersDao.save(user);
 	}
 }

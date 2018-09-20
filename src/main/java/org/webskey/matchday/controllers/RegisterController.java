@@ -9,8 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.webskey.matchday.dto.UsersDto;
-import org.webskey.matchday.services.EmailService;
 import org.webskey.matchday.services.RegisterService;
 
 @Controller	
@@ -18,9 +18,6 @@ public class RegisterController {
 
 	@Autowired
 	private RegisterService registerService;
-	
-	@Autowired
-	private EmailService emailService;
 
 	@RequestMapping("/register")
 	public String register(Model model) {
@@ -29,20 +26,7 @@ public class RegisterController {
 	}
 
 	@PostMapping("/reg")
-	public String reg(@Valid @ModelAttribute("user") UsersDto usersDto, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
-			return "register";
-		} else {
-			try {
-			registerService.saveUser(usersDto);
-			} catch (Exception e) {
-				bindingResult.reject("AlreadyExists", "Username or/and Email already exist.");
-				return "register";
-			}
-		}
-		
-		emailService.sendEmail(usersDto.getEmail(), "Welcome", "Hello " + usersDto.getUsername() + " to my website.");
-		
-		return "reg";
+	public ModelAndView reg(@Valid @ModelAttribute("user") UsersDto usersDto, BindingResult bindingResult) {
+		return registerService.register(usersDto, bindingResult);
 	}
 }

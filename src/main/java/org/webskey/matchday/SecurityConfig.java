@@ -12,14 +12,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.webskey.matchday.services.LoginDetailsService;
+import org.webskey.matchday.services.LoginService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private LoginDetailsService loginDetailsService;
+	private LoginService loginService;
 
 	@Autowired
 	private DataSource dataSource;
@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(loginDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(loginService).passwordEncoder(new BCryptPasswordEncoder());
 
 	}
 
