@@ -8,7 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.ITemplateEngine;
 import org.webskey.matchday.mailmessages.HtmlMessage;
 
 @Service
@@ -18,7 +18,7 @@ public class EmailService {
 	private JavaMailSender javaMailSender;
 
 	@Autowired
-	private TemplateEngine htmlTemplateEngine;
+	private ITemplateEngine htmlTemplateEngine;
 
 	public void sendSimpleEmail(String to, String subject, String content) {
 		SimpleMailMessage message = new SimpleMailMessage(); 
