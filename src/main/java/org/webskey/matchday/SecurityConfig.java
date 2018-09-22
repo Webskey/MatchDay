@@ -24,11 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	};
-
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(loginService).passwordEncoder(new BCryptPasswordEncoder());
@@ -43,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
 		.and()
 		.exceptionHandling().accessDeniedPage("/403")
-		.and().formLogin()
+		.and()
+		.formLogin()
 		.loginPage("/login").permitAll()
 		.failureUrl("/login-error")
 		.and()  

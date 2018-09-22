@@ -11,9 +11,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
@@ -26,9 +26,8 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login-error", method = RequestMethod.GET)
-	public String loginError(Model model) {
-		model.addAttribute("loginError", true);
-		return "login";
+	public ModelAndView loginError() {
+		return new ModelAndView("login", "loginError", true);
 	}
 
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -39,7 +38,7 @@ public class LoginController {
 		}
 		return "redirect:/login?logout";
 	}
-
+	
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accesssDenied(Principal principal) {
 		logger.warn("User: " + principal.getName() + " was trying to get acces restricted page");
