@@ -42,10 +42,22 @@ public class LoginServiceTest {
 	@Test(expected = UsernameNotFoundException.class)
 	public void shouldThrowUsernameNotFoundException_whenUsersEntityNull() {
 		//given
-		when(usersDao.findByUsername("user")).thenReturn(Optional.empty());
+		String username = "user";
+		when(usersDao.findByUsername(username)).thenReturn(Optional.empty());
 		//when
-		UserDetails userDetails = loginService.loadUserByUsername("user");
+		UserDetails userDetails = loginService.loadUserByUsername(username);
 		//then
+		assertNull(userDetails);
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void shouldThrowNullPointerException_whenUsersRolesNull() {
+		//given
+		String username = "user";
+		when(usersDao.findByUsername(username)).thenReturn(UsersEntityBuilder.getWithNullRoles());
+		//when
+		UserDetails userDetails = loginService.loadUserByUsername(username);
+		//then		
 		assertNull(userDetails);
 	}
 }

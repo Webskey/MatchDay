@@ -16,13 +16,15 @@ public class LoginService implements UserDetailsService {
 	@Autowired
 	private UsersDao usersDao;
 
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		UsersEntity user = usersDao.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found."));
+		
 		UserBuilder builder = org.springframework.security.core.userdetails.User.withUsername(username);
 		builder.password(user.getPassword());
+		
 		String[] roles = user.getUsersRoles().stream().map(x -> x.getRole()).toArray(String[]::new);
 		builder.roles(roles);
 

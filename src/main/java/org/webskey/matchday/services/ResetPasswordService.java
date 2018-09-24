@@ -27,7 +27,24 @@ public class ResetPasswordService {
 	private UsersDao usersDao;
 
 	@Autowired
-	private ResetPasswordDao resetPasswordDao;
+	private ResetPasswordDao resetPasswordDao;	
+
+	//change name on this method
+	public ModelAndView sendEmail(BindingResult bindingResult, UsersDto usersDto, String url) {
+		if(bindingResult.hasFieldErrors("email")) {
+			return new ModelAndView("forgottenPassword");
+		}
+
+		Optional<UsersEntity> user = usersDao.findByEmail(usersDto.getEmail());
+		
+		if(!user.isPresent()) {
+			bindingResult.rejectValue("email", "NoSuchEmail", "There is no user with that email");
+			return new ModelAndView("forgottenPassword");
+		}
+
+		createToken(user.get(), url);
+		return new ModelAndView("info").addObject("info", "Email with futher instructions has been sent");
+	}
 
 	private void createToken(UsersEntity user, String url) {
 		String token = UUID.randomUUID().toString();
@@ -41,7 +58,7 @@ public class ResetPasswordService {
 
 		resetPasswordDao.save(rpe);
 
-		//emailService.sendHtmlEmail(new ResetPasswordMessage(user, link));
+		emailService.sendHtmlEmail(new ResetPasswordMessage(user, link));
 	}
 
 	public ModelAndView checkLink(String username, String token) {
@@ -55,14 +72,14 @@ public class ResetPasswordService {
 			if(!rpe.getToken().equals(token)) {
 				return modelAndView.addObject("error", "Incorrect token");
 			}
-			
+
 			long hoursSinceTokenSent = TimeUnit.MILLISECONDS.toHours(new Date().getTime() - rpe.getDate().getTime());
 			if(hoursSinceTokenSent > 24) {
 				return modelAndView.addObject("error","Token expired");		
 			}
 
 			modelAndView.addObject("validLink", true);
-			//TODO extract 
+			//TODO extract , check it which one is nessesary and which one is not
 			UsersDto usersDto = new UsersDto();
 			usersDto.setUsername(username);
 			modelAndView.addObject("user", usersDto);
@@ -79,20 +96,5 @@ public class ResetPasswordService {
 		usersEntity.setPassword(new BCryptPasswordEncoder().encode(usersDto.getPassword()));
 		usersDao.save(usersEntity);
 		return new ModelAndView("info").addObject("info", "Your password is changed, you can now login with new password.");
-	}
-
-	public ModelAndView sendEmail(BindingResult bindingResult, UsersDto usersDto, String url) {
-		if(bindingResult.hasFieldErrors("email")) {
-			return new ModelAndView("forgottenPassword");
-		}
-
-		Optional<UsersEntity> user = usersDao.findByEmail(usersDto.getEmail());
-		if(!user.isPresent()) {
-			bindingResult.rejectValue("email", "NoSuchEmail", "There is no user with that email");
-			return new ModelAndView("forgottenPassword");
-		}
-
-		createToken(user.get(), url);
-		return new ModelAndView("info").addObject("info", "Email with futher instructions has been sent");
 	}
 }

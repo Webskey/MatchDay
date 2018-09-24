@@ -22,4 +22,10 @@ public class UsersEntityBuilder {
 		build();
 		return Optional.of(usersEntity);
 	}
+	
+	public static Optional<UsersEntity> getWithNullRoles() {
+		build();
+		usersEntity.setUsersRoles(null);
+		return Optional.of(usersEntity);
+	}
 }

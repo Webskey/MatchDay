@@ -45,6 +45,7 @@ public class RegisterService {
 		usersEntity.setUsername(usersDto.getUsername());
 		usersEntity.setPassword(encodePassword(usersDto.getPassword()));
 		usersEntity.setEmail(usersDto.getEmail());
+
 		usersDao.save(usersEntity);
 
 		UsersRolesEntity usersRolesEntity = new UsersRolesEntity();

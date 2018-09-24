@@ -29,7 +29,8 @@ public class EmailService {
 	}
 
 	public void sendHtmlEmail(HtmlMessage htmlMessage) {
-		String body = htmlTemplateEngine.process("mail/" + htmlMessage.getTemplate(), htmlMessage.getContext());		
+		String body = htmlTemplateEngine.process("mail/" + htmlMessage.getTemplate(), htmlMessage.getContext());	
+		System.out.println(body);
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();		
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
@@ -39,6 +40,6 @@ public class EmailService {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
-		javaMailSender.send(mimeMessage);
+		//javaMailSender.send(mimeMessage);
 	}
 }
