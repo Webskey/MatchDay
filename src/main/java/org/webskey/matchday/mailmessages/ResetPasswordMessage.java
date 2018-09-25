@@ -1,15 +1,14 @@
 package org.webskey.matchday.mailmessages;
 
 import org.thymeleaf.context.Context;
-import org.webskey.matchday.entities.UsersEntity;
 
 public class ResetPasswordMessage implements HtmlMessage {
 
-	private UsersEntity usersEntity;
+	private String email;
 	private String link;
 
-	public ResetPasswordMessage(UsersEntity usersEntity, String link) {
-		this.usersEntity = usersEntity;
+	public ResetPasswordMessage(String email, String link) {	
+		this.email = email;
 		this.link = link;
 	}
 
@@ -20,7 +19,7 @@ public class ResetPasswordMessage implements HtmlMessage {
 
 	@Override
 	public String getTo() {		
-		return usersEntity.getEmail();
+		return email;
 	}
 
 	@Override
