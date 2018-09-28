@@ -4,6 +4,9 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -127,7 +130,9 @@ public class RegisterControllerTest {
 	@Test
 	public void shouldPassRegistration_whenNoErrors() throws Exception {
 		//given		
-		when(registerService.register(any(), any())).thenReturn(new ModelAndView("info").addObject("info", "Succesfull user registration"));
+		when(registerService.isUsernameExisting(any())).thenReturn(false);
+		when(registerService.isEmailExisting(any())).thenReturn(false);
+		when(registerService.register(any(), any())).thenCallRealMethod();
 		//when
 		mockMvc.perform(post("/reg").flashAttr("user", UsersDtoBuilder.get()))
 		//then
@@ -137,5 +142,7 @@ public class RegisterControllerTest {
 		.andExpect(model().attribute("info", is("Succesfull user registration")))
 		.andExpect(view().name("info"))
 		.andExpect(status().isOk());
+		
+		verify(registerService, times(1)).saveUser(isA(UsersDto.class));
 	}
 }

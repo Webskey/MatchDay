@@ -37,7 +37,7 @@ public class TokenService {
 
 		createSaveSendToken(email, url);		
 
-		return new ModelAndView("info").addObject("info", "Email with futher instructions has been sent");
+		return new ModelAndView("info", "info", "Email with futher instructions has been sent");
 	}
 
 	public boolean isUserByEmailExisting(String email) {

@@ -72,14 +72,14 @@ public class ResetPasswordService {
 
 	public ModelAndView changePassword(UsersDto usersDto, BindingResult bindingResult) {
 		if(bindingResult.hasFieldErrors("password")) {
-			return new ModelAndView("resetPassword").addObject("validLink", true);
+			return new ModelAndView("resetPassword", "validLink", true);
 		}	
 		
 		saveUserWithChangedPassword(usersDto);
 		
 		deleteToken(usersDto.getUsername());		
 
-		return new ModelAndView("info").addObject("info", "Your password is changed, you can now login with new password.");
+		return new ModelAndView("info", "info", "Your password is changed, you can now login with new password.");
 	}
 	
 	public void saveUserWithChangedPassword(UsersDto usersDto) {

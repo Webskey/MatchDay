@@ -35,7 +35,8 @@ public class RegisterService {
 		}
 
 		saveUser(usersDto);
-		emailService.sendHtmlEmail(new WelcomeMessage(usersDto));
+		sendEmail(usersDto);
+		
 		return new ModelAndView("info").addObject("info", "Succesfull user registration");
 	}
 
@@ -54,6 +55,10 @@ public class RegisterService {
 		usersRolesEntity.setUsersEntity(usersEntity);
 
 		usersRolesDao.save(usersRolesEntity);
+	}
+	
+	public void sendEmail(UsersDto usersDto) {
+		emailService.sendHtmlEmail(new WelcomeMessage(usersDto));
 	}
 
 	private String encodePassword(String password) {

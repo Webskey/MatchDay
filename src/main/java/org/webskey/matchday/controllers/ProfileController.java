@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.webskey.matchday.dto.UsersDto;
+import org.webskey.matchday.dto.PasswordDto;
+import org.webskey.matchday.services.ChangePasswordService;
 import org.webskey.matchday.services.ProfileService;
 
 @Controller
@@ -20,18 +21,21 @@ public class ProfileController {
 	@Autowired
 	private ProfileService profileService;
 	
-	@RequestMapping("/profile/myprofile")
-	public ModelAndView profile(Principal princ) {
-		return new ModelAndView("profile", "user", profileService.getUsersDetails(princ.getName()));
+	@Autowired
+	private ChangePasswordService changePasswordService;
+
+	@RequestMapping("/profile")
+	public ModelAndView profile(Principal principal) {
+		return new ModelAndView("profile", "user", profileService.getUsersDetails(principal.getName()));
 	}
-	
-	/*@PostMapping("/change-profile-details")
-	public ModelAndView changeProfileDetails(@Valid @ModelAttribute("user") UsersDto usersDto, BindingResult bindingResult) {
-		return profileService.change(usersDto, bindingResult);
+
+	@RequestMapping("/profile/change-password")
+	public ModelAndView changePassword() {		
+		return new ModelAndView("changePassword", "passwordDto", new PasswordDto());
 	}
-	
+
 	@PostMapping("/profile/change-password")
-	public ModelAndView changePassword(@Valid @ModelAttribute("user") UsersDto usersDto, BindingResult bindingResult) {
-		return profileService.changePassword(usersDto, bindingResult);
-	}*/
+	public ModelAndView changePassword(@Valid @ModelAttribute("passwordDto") PasswordDto passwordDto, BindingResult bindingResult, Principal principal) {
+		return changePasswordService.changePassword(passwordDto, bindingResult, principal.getName());		
+	}
 }
