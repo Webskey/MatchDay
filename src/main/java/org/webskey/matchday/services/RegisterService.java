@@ -5,9 +5,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+import org.webskey.matchday.dao.ProfileDao;
 import org.webskey.matchday.dao.UsersDao;
 import org.webskey.matchday.dao.UsersRolesDao;
 import org.webskey.matchday.dto.UsersDto;
+import org.webskey.matchday.entities.ProfileEntity;
 import org.webskey.matchday.entities.UsersEntity;
 import org.webskey.matchday.entities.UsersRolesEntity;
 import org.webskey.matchday.mailmessages.WelcomeMessage;
@@ -21,6 +23,9 @@ public class RegisterService {
 	@Autowired
 	private UsersRolesDao usersRolesDao;
 
+	@Autowired
+	private ProfileDao profileDao;
+	
 	@Autowired
 	private EmailService emailService;
 
@@ -46,7 +51,7 @@ public class RegisterService {
 		usersEntity.setUsername(usersDto.getUsername());
 		usersEntity.setPassword(encodePassword(usersDto.getPassword()));
 		usersEntity.setEmail(usersDto.getEmail());
-
+		
 		usersDao.save(usersEntity);
 
 		UsersRolesEntity usersRolesEntity = new UsersRolesEntity();
@@ -55,6 +60,11 @@ public class RegisterService {
 		usersRolesEntity.setUsersEntity(usersEntity);
 
 		usersRolesDao.save(usersRolesEntity);
+		
+		ProfileEntity profileEntity = new ProfileEntity();
+		profileEntity.setId(usersEntity.getId());
+		
+		profileDao.save(profileEntity);
 	}
 	
 	public void sendEmail(UsersDto usersDto) {

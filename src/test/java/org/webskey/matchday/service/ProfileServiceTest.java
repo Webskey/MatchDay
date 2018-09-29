@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.webskey.matchday.builders.UsersEntityBuilder;
 import org.webskey.matchday.dao.UsersDao;
-import org.webskey.matchday.dto.UsersDto;
+import org.webskey.matchday.dto.ProfileDto;
 import org.webskey.matchday.services.ProfileService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -34,11 +34,13 @@ public class ProfileServiceTest {
 		String username = "user";
 		when(usersDao.findByUsername(username)).thenReturn(UsersEntityBuilder.get());
 		//when
-		UsersDto usersDto = profileService.getUsersDetails(username);
+		ProfileDto profileDto = profileService.getUsersDetails(username);
 		//then
-		assertEquals(usersDto.getUsername(), username);
-		assertEquals(usersDto.getEmail(), "yerbashop.project@gmail.com");
-		assertEquals(usersDto.getId(), 2);	
+		assertEquals(profileDto.getUsername(), username);
+		assertEquals(profileDto.getEmail(), "yerbashop.project@gmail.com");
+		assertEquals(profileDto.getId(), 2);	
+		assertEquals(profileDto.getLastname(), "Lastname");	
+		assertEquals(profileDto.getCountry(), "Poland");	
 
 		verify(usersDao, times(1)).findByUsername(username);
 	}
@@ -49,8 +51,8 @@ public class ProfileServiceTest {
 		String username = "user";
 		when(usersDao.findByUsername(username)).thenReturn(Optional.empty());
 		//when
-		UsersDto usersDto = profileService.getUsersDetails(username);
+		ProfileDto profileDto = profileService.getUsersDetails(username);
 		//then
-		assertNull(usersDto.getId());
+		assertNull(profileDto.getId());
 	}
 }

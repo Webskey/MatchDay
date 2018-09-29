@@ -14,17 +14,25 @@ public class ProfileDto {
 	@NotNull
 	@Size(min=3, max=10, message="Username should have 3-10 characters")
 	private String username;
-
-	@NotNull
-	@Size(min=5, max=15, message="Password should have 5-15 characters")
-	private String password;
-	
-	@NotNull
-	@Size(min=5, max=15, message="Password should have 5-15 characters")
-	private String oldPassword;
 	
 	@NotNull
 	@Email
 	@Size(min=5, max=50)
 	private String email;
+	
+	private String firstname;
+	
+	private String lastname;
+	
+	private String phoneNumber;
+	
+	private String dateOfBirth;
+	
+	private String country;	
+	
+	private String city;
+	
+	private String adress;
+	
+	private String zipcode;	
 }

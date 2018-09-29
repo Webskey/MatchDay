@@ -4,7 +4,6 @@ import org.webskey.matchday.dto.UsersDto;
 
 public class UsersDtoBuilder {
 
-
 	private static UsersDto usersDto;
 
 	public static void build() {

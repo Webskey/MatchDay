@@ -32,7 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.webskey.matchday.Main;
 import org.webskey.matchday.builders.PasswordDtoBuilder;
 import org.webskey.matchday.dto.PasswordDto;
-import org.webskey.matchday.dto.UsersDto;
+import org.webskey.matchday.dto.ProfileDto;
 import org.webskey.matchday.services.ChangePasswordService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -76,7 +76,7 @@ public class ProfileControllerTest {
 		mockMvc.perform(get("/profile").with(user(username).password("pass").roles("USER")))
 		//then
 		.andExpect(status().isOk())	
-		.andExpect(model().attribute("user", instanceOf(UsersDto.class)))
+		.andExpect(model().attribute("user", instanceOf(ProfileDto.class)))
 		.andExpect(model().attribute("user", hasProperty("username", is("user"))))
 		.andExpect(view().name("profile"));
 	}

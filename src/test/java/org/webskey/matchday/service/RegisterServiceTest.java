@@ -19,9 +19,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.webskey.matchday.builders.UsersDtoBuilder;
 import org.webskey.matchday.builders.UsersEntityBuilder;
+import org.webskey.matchday.dao.ProfileDao;
 import org.webskey.matchday.dao.UsersDao;
 import org.webskey.matchday.dao.UsersRolesDao;
 import org.webskey.matchday.dto.UsersDto;
+import org.webskey.matchday.entities.ProfileEntity;
 import org.webskey.matchday.entities.UsersEntity;
 import org.webskey.matchday.entities.UsersRolesEntity;
 import org.webskey.matchday.mailmessages.WelcomeMessage;
@@ -36,6 +38,9 @@ public class RegisterServiceTest {
 
 	@Mock
 	private UsersRolesDao usersRolesDao;
+	
+	@Mock
+	private ProfileDao profileDao;
 
 	@Mock
 	private BindingResult bindingResult;
@@ -109,5 +114,6 @@ public class RegisterServiceTest {
 		//then
 		verify(usersDao, times(1)).save(argThat(usersEntityMatcher));		
 		verify(usersRolesDao, times(1)).save(argThat(usersRolesMatcher));
+		verify(profileDao, times(1)).save(isA(ProfileEntity.class));
 	}
 }
