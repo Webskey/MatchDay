@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="user-menu" th:fragment="user">
+		<div sec:authorize="isAuthenticated()">
+			<a href="/profile"><span sec:authentication="name">username</span></a>
+			<a href="/logout">Logout</a>
+		</div>
+		<div sec:authorize="!isAuthenticated()">
+			<a href="/register">Register</a> <br> <a href="/login">Login</a>
+			<form th:replace="login :: login"></form>
+		</div>
+	</nav>
+
+	<!-- 
+	Roles:<span sec:authentication="principal.authorities">[ROLE_USER,ROLE_ADMIN]</span>
+	<div sec:authorize="hasRole('ROLE_ADMIN')">This content is only	shown to administrators.</div>
+	<div sec:authorize="hasRole('ROLE_USER')">This content is only shown to users.</div>
+	-->
+</body>
+</html>
