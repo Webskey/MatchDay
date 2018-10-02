@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.webskey.matchday.dto.PasswordDto;
+import org.webskey.matchday.dto.ProfileDto;
 import org.webskey.matchday.services.ChangePasswordService;
 import org.webskey.matchday.services.ProfileService;
 
@@ -37,5 +38,10 @@ public class ProfileController {
 	@PostMapping("/profile/change-password")
 	public ModelAndView changePassword(@Valid @ModelAttribute("passwordDto") PasswordDto passwordDto, BindingResult bindingResult, Principal principal) {
 		return changePasswordService.changePassword(passwordDto, bindingResult, principal.getName());		
+	}
+	
+	@PostMapping("/profile/change-details")
+	public ModelAndView changeDetails(@Valid @ModelAttribute("user") ProfileDto profileDto, BindingResult bindingResult) {
+		return profileService.changeDetails(profileDto, bindingResult);
 	}
 }
