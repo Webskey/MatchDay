@@ -1,5 +1,7 @@
 package org.webskey.matchday.builders;
 
+import java.util.Optional;
+
 import org.webskey.matchday.entities.ProfileEntity;
 
 public class ProfileEntityBuilder {
@@ -19,8 +21,8 @@ public class ProfileEntityBuilder {
 		profileEntity.setZipcode("11-222");
 	}
 	
-	public static ProfileEntity get() {
+	public static Optional<ProfileEntity> get() {
 		build();
-		return profileEntity;
+		return Optional.of(profileEntity);
 	}
 }

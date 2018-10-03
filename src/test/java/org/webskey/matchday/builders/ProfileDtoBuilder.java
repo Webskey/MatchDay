@@ -10,14 +10,14 @@ public class ProfileDtoBuilder {
 		profileDto = new ProfileDto();
 		profileDto.setId(2);
 		profileDto.setUsername("user");
-		profileDto.setEmail("yerbashop.project@gmail.com");
+		profileDto.setEmail("yerbashop.project@gmail.co.uk");
 		profileDto.setFirstname("Firstname");
 		profileDto.setLastname("Lastname");
 		profileDto.setPhoneNumber("123-456-789");
 		profileDto.setDateOfBirth("15-02-1999");
 		profileDto.setCountry("Poland");
 		profileDto.setCity("Warsaw");
-		profileDto.setAdress("Aleje Jerozolimskie 15/8");
+		profileDto.setAdress("Aleje Jerozolimskie 155/8");
 		profileDto.setZipcode("11-222");
 	}
 	

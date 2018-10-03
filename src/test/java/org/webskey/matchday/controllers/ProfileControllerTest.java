@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,9 +32,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.webskey.matchday.Main;
 import org.webskey.matchday.builders.PasswordDtoBuilder;
+import org.webskey.matchday.builders.ProfileDtoBuilder;
 import org.webskey.matchday.dto.PasswordDto;
 import org.webskey.matchday.dto.ProfileDto;
 import org.webskey.matchday.services.ChangePasswordService;
+import org.webskey.matchday.services.ProfileService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -43,6 +46,9 @@ public class ProfileControllerTest {
 
 	@MockBean
 	private ChangePasswordService changePasswordService;
+
+	@MockBean
+	private ProfileService profileService;
 
 	@InjectMocks
 	private ProfileController profileController;
@@ -72,6 +78,7 @@ public class ProfileControllerTest {
 	public void shouldReturnProfileViewWithUserDetails_whenUserLogged() throws Exception {
 		//given
 		String username = "user";
+		when(profileService.getUsersDetails(any())).thenReturn(ProfileDtoBuilder.get());
 		//when
 		mockMvc.perform(get("/profile").with(user(username).password("pass").roles("USER")))
 		//then
@@ -188,5 +195,36 @@ public class ProfileControllerTest {
 		.andExpect(view().name("info"));
 
 		verify(changePasswordService, times(1)).saveNewPassword("user", "passwordNew");
+	}
+
+	@Test
+	public void shouldReturnProfileView_whenChangeProfileHasValidationErrors() throws Exception {
+		//given
+		String username = "user";
+		when(profileService.changeDetails(any(), any())).thenCallRealMethod();
+		//when
+		mockMvc.perform(post("/profile/change-details").with(user(username).password("pass").roles("USER")).param("email", "F"))
+		//then
+		.andExpect(status().isOk())	
+		.andExpect(model().attribute("user", instanceOf(ProfileDto.class)))
+		.andExpect(model().attributeHasFieldErrors("user", "email"))
+		.andExpect(view().name("profile"));
+	}
+
+	@Test
+	public void shouldChangeProfileDetails_whenChangeProfileHasNoValidationErrors() throws Exception {
+		//given
+		String username = "user";
+		when(profileService.changeDetails(any(), any())).thenCallRealMethod();
+		//when
+		mockMvc.perform(post("/profile/change-details").with(user(username).password("pass").roles("USER")).flashAttr("user", ProfileDtoBuilder.get()))
+		//then
+		.andExpect(status().isOk())	
+		.andExpect(model().attribute("user", instanceOf(ProfileDto.class)))
+		.andExpect(model().attribute("info", is("Profile details changed successfully")))
+		.andExpect(view().name("info"));
+
+		verify(profileService, times(1)).updateDetails(argThat(user -> 			
+		user.getFirstname().equals("Firstname") && user.getCity().equals("Warsaw")));
 	}
 }

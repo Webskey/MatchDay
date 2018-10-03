@@ -16,7 +16,7 @@ public class UsersEntityBuilder {
 		 usersEntity.setPassword("password");
 		 usersEntity.setEmail("yerbashop.project@gmail.com");
 		 usersEntity.setUsersRoles(List.of(UsersRolesEntityBuilder.get()));
-		 usersEntity.setProfileEntity(ProfileEntityBuilder.get());
+		 usersEntity.setProfileEntity(ProfileEntityBuilder.get().get());
 	 }
 	 
 	public static Optional<UsersEntity> get() {
