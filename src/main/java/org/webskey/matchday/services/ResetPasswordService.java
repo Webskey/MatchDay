@@ -4,11 +4,14 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+import org.webskey.matchday.controllers.HomeController;
 import org.webskey.matchday.dao.ResetPasswordDao;
 import org.webskey.matchday.dao.UsersDao;
 import org.webskey.matchday.dto.UsersDto;
@@ -25,6 +28,8 @@ public class ResetPasswordService {
 	private ResetPasswordDao resetPasswordDao;	
 	
 	private ResetPasswordEntity resetPasswordEntity;
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	public ModelAndView checkLink(String username, String token) {
 		ModelAndView modelAndView = new ModelAndView("resetPassword");
@@ -74,6 +79,8 @@ public class ResetPasswordService {
 		if(bindingResult.hasFieldErrors("password")) {
 			return new ModelAndView("resetPassword", "validLink", true);
 		}	
+		
+		logger.info("Reset password for user: " + usersDto.getUsername());
 		
 		saveUserWithChangedPassword(usersDto);
 		

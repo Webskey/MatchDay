@@ -1,9 +1,11 @@
 package org.webskey.matchday.builders;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.webskey.matchday.entities.UsersEntity;
+import org.webskey.matchday.entities.UsersRolesEntity;
 
 public class UsersEntityBuilder {
 
@@ -15,7 +17,11 @@ public class UsersEntityBuilder {
 		 usersEntity.setUsername("user");
 		 usersEntity.setPassword("password");
 		 usersEntity.setEmail("yerbashop.project@gmail.com");
-		 usersEntity.setUsersRoles(List.of(UsersRolesEntityBuilder.get()));
+		 
+		 List<UsersRolesEntity> usersRoles = new ArrayList<>();
+		 usersRoles.add(UsersRolesEntityBuilder.get());
+		 usersEntity.setUsersRoles(usersRoles);
+		 
 		 usersEntity.setProfileEntity(ProfileEntityBuilder.get().get());
 	 }
 	 

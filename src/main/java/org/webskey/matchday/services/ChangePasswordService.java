@@ -1,10 +1,13 @@
 package org.webskey.matchday.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+import org.webskey.matchday.controllers.HomeController;
 import org.webskey.matchday.dao.UsersDao;
 import org.webskey.matchday.dto.PasswordDto;
 import org.webskey.matchday.entities.UsersEntity;
@@ -14,6 +17,8 @@ public class ChangePasswordService {
 	
 	@Autowired
 	private UsersDao usersDao;
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	public ModelAndView changePassword(PasswordDto passwordDto, BindingResult bindingResult, String username) {
 		if(bindingResult.hasErrors()) {			
@@ -29,6 +34,8 @@ public class ChangePasswordService {
 			bindingResult.rejectValue("oldPassword", "NotEqual", "Old password incorrect");
 			return new ModelAndView("changePassword");
 		}
+		
+		logger.info("Change password for user: " + username);
 		
 		saveNewPassword(username, passwordDto.getPassword());
 				

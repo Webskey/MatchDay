@@ -1,10 +1,13 @@
 package org.webskey.matchday.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+import org.webskey.matchday.controllers.HomeController;
 import org.webskey.matchday.dao.ProfileDao;
 import org.webskey.matchday.dao.UsersDao;
 import org.webskey.matchday.dao.UsersRolesDao;
@@ -28,6 +31,8 @@ public class RegisterService {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	public ModelAndView register(UsersDto usersDto, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
@@ -39,6 +44,7 @@ public class RegisterService {
 			return new ModelAndView("register");
 		}
 
+		logger.info("Register, new user: " + usersDto.getUsername() + "/t" + usersDto.getEmail());
 		saveUser(usersDto);
 		sendEmail(usersDto);
 		

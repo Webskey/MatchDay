@@ -1,9 +1,12 @@
 package org.webskey.matchday.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+import org.webskey.matchday.controllers.HomeController;
 import org.webskey.matchday.dao.ProfileDao;
 import org.webskey.matchday.dao.UsersDao;
 import org.webskey.matchday.dto.ProfileDto;
@@ -18,6 +21,8 @@ public class ProfileService {
 	
 	@Autowired
 	private ProfileDao profileDao;
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	public ProfileDto getUsersDetails(String username) {
 
@@ -43,6 +48,8 @@ public class ProfileService {
 		if(bindingResult.hasErrors()) {			
 			return new ModelAndView("profile");
 		}
+		
+		logger.info("Profile details updated for user: " + profileDto.getUsername());
 		
 		updateDetails(profileDto);
 		
