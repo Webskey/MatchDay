@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Login page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<header th:replace="layouts/header :: header"></header>
+	<h1>Login</h1>
+
+	<p th:if="${loginError}">Wrong user or password</p>
+	<form th:action="@{/login}" method="post" th:fragment="login">
+
+		<table>
+			<tr>
+				<td>Username</td>
+				<td><input type="text" name="username"></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="password" name="password"></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="remember-me"></td>
+				<td>Remember me on this Computer</td>
+			</tr>
+			<tr>
+				<td><button type="submit">Login</button></td>
+			</tr>
+		</table>
+	</form>
+
+	<a href="/forgotten-password">Forgot your password?</a>
+</body>
+</html>
