@@ -1,15 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+
+<head th:fragment="head-fragment">
+<title>MatchDay</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
+<link rel="shortcut icon" type="image/png"	href="https://i.imgur.com/UdmOKtW.png" />
+<link href="/style.css" rel="stylesheet">
+<head>
 <body>
-	<header class="headerx" th:fragment="header">
-	<a href = "/">Home</a>
-	<a href = "/login">Login</a>
-	<a href = "/admin">Admin</a>
-	<a href = "/register">Register</a>
-	<a href = "/profile">Profile</a>
+
+	<header class="header-class" th:fragment="header-fragment">
+		<div id="logo-container">
+			<img id="logo-img" alt="logo" src="https://i.imgur.com/6Q4AhT8.png">
+		</div>
+		<a href="/">Home</a> <a href="/login">Login</a> <a href="/admin">Admin</a>
+		<a href="/register">Register</a> <a href="/profile">Profile</a>
 	</header>
 </body>
 </html>

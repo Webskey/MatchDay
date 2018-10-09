@@ -26,7 +26,7 @@ public class ChangePasswordService {
 		}
 
 		if(!passwordDto.getPassword().equals(passwordDto.getConfirmPassword())) {
-			bindingResult.rejectValue("confirmPassword", "NotEqual", "Password and Confirm Password does not match");
+			bindingResult.rejectValue("confirmPassword", "NotEqual", "Password and Confirm Password do not match");
 			return new ModelAndView("changePassword");
 		}
 
