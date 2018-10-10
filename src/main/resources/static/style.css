@@ -3,22 +3,38 @@
 	border: 3px solid black;
 }
 
-#logo-container {
-	width: 70%;
-	min-width: 800px;
-	position: relative;
-	margin: auto;
-	border: 3px solid yellow;
+#logo-img {
+	width: 100%;
 }
 
-#logo-img{
-	width: 100%;	
-	position: relative;	
-	border: 3px solid orange;
+#mainmenu {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	position: relative;
+	list-style-type: none;
+	background-color: #376301;
 }
 
-.header-class {
-	position: relative;
-	margin: auto;
-	border: 3px solid green;
+#mainmenu li {
+	float: left;
+	width: 20%;
+}
+
+#mainmenu li a {
+	color: #dcfeb3;
+	display: block;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: calc(5px + 1.2vw);
+}
+
+#mainmenu li a:hover {
+	color: #376301;
+	background-color: #dcfeb3;
+}
+
+body {
+	background-color: #e7ffe6;
 }

@@ -11,10 +11,17 @@
 
 	<header class="header-class" th:fragment="header-fragment">
 		<div id="logo-container">
-			<img id="logo-img" alt="logo" src="https://i.imgur.com/6Q4AhT8.png">
+			<a href="/"><img id="logo-img" alt="logo" src="https://i.imgur.com/6Q4AhT8.png"></a>
 		</div>
-		<a href="/">Home</a> <a href="/login">Login</a> <a href="/admin">Admin</a>
-		<a href="/register">Register</a> <a href="/profile">Profile</a>
+		<div id="mainmenu-container">			
+			<ul id="mainmenu">  				
+    			<li><a href="/">HOME</a></li>
+    			<li><a href="/login">LOGIN</a></li>
+   				<li><a href="/admin">ADMIN</a></li>
+   				<li><a href="/register">REGISTER</a></li>
+   				<li><a href="/profile">PROFILE</a></li>  				
+  			</ul>
+		</div>
 	</header>
 </body>
 </html>
