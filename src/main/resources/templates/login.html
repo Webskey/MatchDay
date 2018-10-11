@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Login page</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head th:insert="layouts/header :: head-fragment">
 </head>
 <body>
 	<header th:replace="layouts/header :: header"></header>
@@ -14,18 +13,18 @@
 		<table>
 			<tr>
 				<td>Username</td>
-				<td><input type="text" name="username"></td>
+				<td><input type="text" class="form-control" name="username"></td>
 			</tr>
 			<tr>
 				<td>Password</td>
-				<td><input type="password" name="password"></td>
+				<td><input type="password" class="form-control" placeholder="Enter password" name="password"></td>
 			</tr>
 			<tr>
 				<td><input type="checkbox" name="remember-me"></td>
 				<td>Remember me on this Computer</td>
 			</tr>
 			<tr>
-				<td><button type="submit">Login</button></td>
+				<td><button class="btn btn-default" type="submit">Login</button></td>
 			</tr>
 		</table>
 	</form>

@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Register Page</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head th:insert="layouts/header :: head-fragment">
 </head>
 <body>
 	<header th:replace="layouts/header :: header"></header>
@@ -14,25 +13,25 @@
 		<table>
 			<tr>
 				<td>Name:</td>
-				<td><input type="text" th:field="*{username}" name="username" /></td>
+				<td><input type="text" class="form-control" th:field="*{username}" name="username" /></td>
 				<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username
 					Error</td>
 			</tr>
 			<tr>
 				<td>Password</td>
-				<td><input type="password" th:field="*{password}"
+				<td><input type="password" class="form-control" th:field="*{password}"
 					name="password" /></td>
 				<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
 					error Error</td>
 			</tr>
 			<tr>
 				<td>Email</td>
-				<td><input type="text" th:field="*{email}" name="email" /></td>
+				<td><input type="text" class="form-control" th:field="*{email}" name="email" /></td>
 				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
 					error Error</td>
 			</tr>
 			<tr>
-				<td><button type="submit">Submit</button></td>
+				<td><button class="btn btn-default" type="submit">Submit</button></td>
 			</tr>
 		</table>
 	</form>
