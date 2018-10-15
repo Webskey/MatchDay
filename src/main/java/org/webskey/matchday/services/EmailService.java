@@ -1,5 +1,8 @@
 package org.webskey.matchday.services;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -20,6 +23,8 @@ public class EmailService {
 	@Autowired
 	private ITemplateEngine htmlTemplateEngine;
 
+	private ExecutorService executorService = Executors.newCachedThreadPool();
+
 	public void sendSimpleEmail(String to, String subject, String content) {
 		SimpleMailMessage message = new SimpleMailMessage(); 
 		message.setTo(to); 
@@ -29,16 +34,19 @@ public class EmailService {
 	}
 
 	public void sendHtmlEmail(HtmlMessage htmlMessage) {
-		String body = htmlTemplateEngine.process("mail/" + htmlMessage.getTemplate(), htmlMessage.getContext());	
-		MimeMessage mimeMessage = javaMailSender.createMimeMessage();		
-		try {
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-			helper.setTo(htmlMessage.getTo());
-			helper.setSubject(htmlMessage.getSubject());
-			helper.setText(body, true);			
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		//javaMailSender.send(mimeMessage);
+		executorService.submit(() -> {
+			String body = htmlTemplateEngine.process("mail/" + htmlMessage.getTemplate(), htmlMessage.getContext());	
+			MimeMessage mimeMessage = javaMailSender.createMimeMessage();		
+			try {
+				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+				helper.setTo(htmlMessage.getTo());
+				helper.setSubject(htmlMessage.getSubject());
+				helper.setText(body, true);			
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+			javaMailSender.send(mimeMessage);
+			System.out.println("email sent");
+		});
 	}
 }
