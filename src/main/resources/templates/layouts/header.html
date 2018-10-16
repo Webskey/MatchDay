@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head-fragment">
-<title>MatchDay</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="shortcut icon" type="image/png"	href="https://i.imgur.com/UdmOKtW.png" />
-<link href="/style.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<title>MatchDay</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="shortcut icon" type="image/png"	href="https://i.imgur.com/UdmOKtW.png" />
+	<link href="/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <head>
 <body>
 
@@ -23,6 +23,8 @@
    				<li><a href="/profile">PROFILE</a></li>  				
   			</ul>
 		</div>
+		
+		<nav th:replace="layouts/usermenu :: usermenu-fragment"></nav>
 	</header>
 </body>
 </html>

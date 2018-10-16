@@ -6,17 +6,18 @@
 <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-	<nav class="user-menu" th:fragment="user">
-		<div sec:authorize="isAuthenticated()">
-			<a href="/profile"><span sec:authentication="name">username</span></a>
-			<a href="/logout">Logout</a>
-		</div>
-		<div sec:authorize="!isAuthenticated()">
-			<a href="/register">Register</a> <br> <a href="/login">Login</a>
-			<form th:replace="login :: login"></form>
-		</div>
+	<nav class="usermenu-nav" th:fragment="usermenu-fragment">			
+			<ul class="usermenu" sec:authorize="isAuthenticated()">
+				<li><a href="/profile"> <i>You're logged as: <b><span sec:authentication="name">username</span></b></i></a></li> 				
+    			<li><a href="/profile">PROFILE</a></li>
+   				<li><a href="/logout">LOGOUT</a></li> 				
+  			</ul>
+  			
+			<ul class="usermenu" sec:authorize="!isAuthenticated()">				
+    			<li><a href="/login">LOGIN</a></li>
+   				<li><a href="/register">REGISTER</a></li> 				
+  			</ul>
 	</nav>
-
 	<!-- 
 	Roles:<span sec:authentication="principal.authorities">[ROLE_USER,ROLE_ADMIN]</span>
 	<div sec:authorize="hasRole('ROLE_ADMIN')">This content is only	shown to administrators.</div>
