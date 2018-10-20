@@ -1,0 +1,48 @@
+#login-container {
+	position: relative;
+	margin: auto;
+	padding: 1%;
+	width: 50%;
+	border: 3px solid black;
+}
+
+#loginform-table {
+	width: 70%;
+	position: relative;
+	margin: auto;
+}
+
+.login-label {
+	font-size: calc(5px + 1.2vw);
+	padding-top: 15px;
+}
+
+.login-input {
+	padding-top: 5px;
+}
+
+#login-rememberme {
+	padding-top: 2px;
+	font-size: calc(5px + 0.7vw);
+	vertical-align: top;
+}
+
+#login-submit {
+	text-align: right;
+}
+
+#login-submit-button {
+	width: 30%;
+}
+
+#login-forgotpass {
+	font-size: calc(5px + 0.7vw);
+	text-align: right;
+	padding-top: 2.5px;
+}
+
+p {
+	text-align: center;
+	color: red;
+	font-size: 24px;
+}

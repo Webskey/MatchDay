@@ -1,34 +1,47 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link href="css/login.css" rel="stylesheet">
+
 <head th:insert="layouts/header :: head-fragment">
+	<title>LOGIN</title>
 </head>
 <body>
 	<header th:replace="layouts/header :: header"></header>
-	<h1>Login</h1>
+	
+	<div id="login-container">
+		<h1>Login</h1>
 
-	<p th:if="${loginError}">Wrong user or password</p>
-	<form th:action="@{/login}" method="post" th:fragment="login">
+		<p th:if="${loginError}">Wrong user or password</p>
+		<form th:action="@{/login}" method="post" th:fragment="login">
 
-		<table>
-			<tr>
-				<td>Username</td>
-				<td><input type="text" class="form-control" name="username"></td>
-			</tr>
-			<tr>
-				<td>Password</td>
-				<td><input type="password" class="form-control" placeholder="Enter password" name="password"></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" name="remember-me"></td>
-				<td>Remember me on this Computer</td>
-			</tr>
-			<tr>
-				<td><button class="btn btn-default" type="submit">Login</button></td>
-			</tr>
-		</table>
-	</form>
-
-	<a href="/forgotten-password">Forgot your password?</a>
+			<table id="loginform-table">
+				<tr>
+					<td class="login-label">Username</td>
+				</tr>
+				<tr>
+					<td class="login-input"><input type="text" class="form-control" placeholder="Enter username" name="username"></td>
+				</tr>
+				<tr>
+					<td class="login-label">Password</td>
+				</tr>
+				<tr>
+					<td class="login-input"><input type="password" class="form-control" placeholder="Enter password" name="password"></td>
+				</tr>
+				<tr>
+					<td id="login-rememberme"><input type="checkbox" name="remember-me"> Remember me</td>
+				</tr>
+				<tr>
+					<td id="login-submit"><button id="login-submit-button" class="btn btn-default" type="submit">Login</button></td>
+				</tr>
+				<tr>
+					<td id="login-forgotpass"><a href="/forgotten-password">Forgot your password?</a></td>
+				</tr>
+			</table>
+		</form>
+				
+		
+	</div>
+	
 </body>
 </html>
