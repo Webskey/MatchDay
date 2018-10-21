@@ -3,7 +3,6 @@
 	margin: auto;
 	padding: 1%;
 	width: 50%;
-	border: 3px solid black;
 }
 
 #loginform-table {
@@ -32,6 +31,7 @@
 }
 
 #login-submit-button {
+	min-width: 70px;
 	width: 30%;
 }
 

@@ -39,11 +39,22 @@ public class RegisterService {
 			return new ModelAndView("register");
 		} 
 
-		if(isUsernameExisting(usersDto.getUsername()) || isEmailExisting(usersDto.getEmail()))	{		
-			bindingResult.reject("AlreadyExists", "Username or/and Email already exist.");
+		boolean areCredentialsTaken = false;
+		
+		if(isUsernameExisting(usersDto.getUsername()))	{		
+			bindingResult.rejectValue("username", "AlreadyExists", "Username already exist.");
+			areCredentialsTaken = true;
+		}
+		
+		if(isEmailExisting(usersDto.getEmail())) {
+			bindingResult.rejectValue("email", "AlreadyExists", "Email already exist.");
+			areCredentialsTaken = true;
+		}
+		
+		if(areCredentialsTaken) {
 			return new ModelAndView("register");
 		}
-
+		
 		logger.info("Register, new user: " + usersDto.getUsername() + "/t" + usersDto.getEmail());
 		saveUser(usersDto);
 		sendEmail(usersDto);

@@ -1,40 +1,40 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<head th:insert="layouts/header :: head-fragment">
+	<link href="css/register.css" rel="stylesheet">
+	<head th:insert="layouts/header :: head-fragment">
 </head>
 <body>
 	<header th:replace="layouts/header :: header"></header>
-	<h2>Register</h2>
-
-	<div th:errors="${user}">Error register</div>
-
-	<form th:object="${user}" th:action="@{/reg}" method="post">
-		<table>
-			<tr>
-				<td>Name:</td>
-				<td><input type="text" class="form-control" th:field="*{username}" name="username" /></td>
-				<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username
-					Error</td>
+	
+	<div id="register-container">
+		<h2>Register</h2>
+		
+		<form th:object="${user}" th:action="@{/reg}" method="post">
+			<table id="registerform-table">
+				<tr th:classappend="${#fields.hasErrors('username')} ? has-error : no-error">
+				<td class="register-label">Username:</td>
+				<td class="register-input"><input type="text" class="form-control" placeholder="Enter username" required th:field="*{username}" name="username" />
+				<td class="register-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</td>
 			</tr>
-			<tr>
-				<td>Password</td>
-				<td><input type="password" class="form-control" th:field="*{password}"
+			<tr th:classappend="${#fields.hasErrors('password')} ? has-error : no-error">
+				<td class="register-label">Password:</td>
+				<td class="register-input"><input type="password" class="form-control" placeholder="Enter password" required th:field="*{password}"
 					name="password" /></td>
-				<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
+				<td class="register-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
+					error Error</td>
+			</tr>
+			<tr th:classappend="${#fields.hasErrors('email')} ? has-error : no-error">
+				<td class="register-label">Email:</td>
+				<td class="register-input"><input type="text" class="form-control" placeholder="Enter email" required th:field="*{email}" name="email" /></td>
+				<td class="register-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
 					error Error</td>
 			</tr>
 			<tr>
-				<td>Email</td>
-				<td><input type="text" class="form-control" th:field="*{email}" name="email" /></td>
-				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
-					error Error</td>
-			</tr>
-			<tr>
-				<td><button class="btn btn-default" type="submit">Submit</button></td>
+				<td colspan=3 id="register-submit"><button id="register-submit-button" class="btn btn-default" type="submit">Register</button></td>
 			</tr>
 		</table>
 	</form>
-
+	</div>
 </body>
 </html>

@@ -1,0 +1,37 @@
+#register-container {
+	position: relative;
+	margin: auto;
+	padding: 1%;
+	width: 70%;
+}
+
+#registerform-table {
+	width: 80%;
+	position: relative;
+	margin: auto;
+}
+
+.register-label {
+	font-size: calc(5px + 1vw);
+}
+
+.register-input {
+	padding-bottom: 5px;
+}
+
+.register-error{
+	color:red;
+	font-size: calc(5px + 1vw);
+	font-weight: bold;
+	padding-left: 3px;
+}
+
+#register-submit {
+	padding-top: 5px;
+	text-align: right;
+}
+
+#register-submit-button {
+	min-width: 70px;
+	width: 30%;
+}

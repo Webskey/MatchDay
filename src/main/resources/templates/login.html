@@ -1,10 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link href="css/login.css" rel="stylesheet">
-
-<head th:insert="layouts/header :: head-fragment">
-	<title>LOGIN</title>
+	<link href="css/login.css" rel="stylesheet">
+	<head th:insert="layouts/header :: head-fragment">
 </head>
 <body>
 	<header th:replace="layouts/header :: header"></header>
@@ -20,13 +18,13 @@
 					<td class="login-label">Username</td>
 				</tr>
 				<tr>
-					<td class="login-input"><input type="text" class="form-control" placeholder="Enter username" name="username"></td>
+					<td class="login-input"><input type="text" class="form-control" placeholder="Enter username" required name="username"></td>
 				</tr>
 				<tr>
 					<td class="login-label">Password</td>
 				</tr>
 				<tr>
-					<td class="login-input"><input type="password" class="form-control" placeholder="Enter password" name="password"></td>
+					<td class="login-input"><input type="password" class="form-control" placeholder="Enter password" required name="password"></td>
 				</tr>
 				<tr>
 					<td id="login-rememberme"><input type="checkbox" name="remember-me"> Remember me</td>

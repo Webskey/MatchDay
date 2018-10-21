@@ -12,15 +12,14 @@ public class UsersDto {
 	private int id;
 
 	@NotNull
-	@Size(min=3, max=10, message="Username should have 3-10 characters")
+	@Size(min=3, max=10, message="3-10 characters")
 	private String username;
 
 	@NotNull
-	@Size(min=5, max=15, message="Password should have 5-15 characters")
+	@Size(min=5, max=15, message="5-15 characters")
 	private String password;
 	
 	@NotNull
-	@Email
-	@Size(min=5, max=50)
+	@Email(message="wrong email")
 	private String email;
 }
