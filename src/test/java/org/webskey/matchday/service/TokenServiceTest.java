@@ -21,7 +21,7 @@ import org.webskey.matchday.dao.ResetPasswordDao;
 import org.webskey.matchday.dao.UsersDao;
 import org.webskey.matchday.mailmessages.ResetPasswordMessage;
 import org.webskey.matchday.services.EmailService;
-import org.webskey.matchday.services.TokenService;
+import org.webskey.matchday.services.ForgottenPasswordService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TokenServiceTest {
@@ -39,7 +39,7 @@ public class TokenServiceTest {
 	private EmailService emailService;
 
 	@InjectMocks
-	private TokenService tokenService;
+	private ForgottenPasswordService tokenService;
 
 	@Test
 	public void shouldReturnForgottenPasswordView_whenEmailFieldHasErrors() {

@@ -29,7 +29,7 @@ import org.webskey.matchday.builders.UsersDtoBuilder;
 import org.webskey.matchday.dao.ResetPasswordDao;
 import org.webskey.matchday.dto.UsersDto;
 import org.webskey.matchday.services.ResetPasswordService;
-import org.webskey.matchday.services.TokenService;
+import org.webskey.matchday.services.ForgottenPasswordService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ResetPasswordControllerTest {
@@ -41,13 +41,13 @@ public class ResetPasswordControllerTest {
 	private HttpServletRequest request;
 
 	@Mock
-	private TokenService tokenService;
+	private ForgottenPasswordService tokenService;
 
 	@Mock
 	private ResetPasswordDao resetPasswordDao;	
 
 	@InjectMocks
-	private ResetPasswordController resetPasswordController;
+	private ForgottenPasswordController resetPasswordController;
 
 	private MockMvc mockMvc;
 

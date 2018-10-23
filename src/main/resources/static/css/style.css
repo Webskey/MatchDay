@@ -67,3 +67,15 @@ body {
 	margin: 20px !important;
 	background: #f3fff2 !important;
 }
+
+#info-container {
+	position: relative;
+	width: 70%;
+	margin: auto;
+	top: 50px;
+}
+
+#info {
+	text-align: center;
+	font-size: calc(16px + 1vw);
+}

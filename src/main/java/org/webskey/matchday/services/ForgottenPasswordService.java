@@ -17,7 +17,7 @@ import org.webskey.matchday.entities.UsersEntity;
 import org.webskey.matchday.mailmessages.ResetPasswordMessage;
 
 @Service
-public class TokenService {
+public class ForgottenPasswordService {
 
 	@Autowired
 	private UsersDao usersDao;
@@ -42,7 +42,7 @@ public class TokenService {
 
 		createSaveSendToken(email, url);		
 
-		return new ModelAndView("info", "info", "Email with futher instructions has been sent");
+		return new ModelAndView("info", "info", "Email with futher instructions has been sent.");
 	}
 
 	public boolean isUserByEmailExisting(String email) {

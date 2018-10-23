@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.webskey.matchday.dto.UsersDto;
 import org.webskey.matchday.services.ResetPasswordService;
-import org.webskey.matchday.services.TokenService;
+import org.webskey.matchday.services.ForgottenPasswordService;
 
 @Controller
-public class ResetPasswordController {
+public class ForgottenPasswordController {
 
 	@Autowired
 	private ResetPasswordService resetPasswordService;
 	
 	@Autowired
-	private TokenService tokenService;
+	private ForgottenPasswordService forgottenPasswordService;
 
 	@RequestMapping(value = "/forgotten-password", method = RequestMethod.GET)
 	public ModelAndView forgottenPassword() {
@@ -31,7 +31,7 @@ public class ResetPasswordController {
 
 	@RequestMapping(value = "/forgotten-pass", method = RequestMethod.POST)
 	public ModelAndView forgottenPass(@Valid @ModelAttribute("user") UsersDto usersDto, BindingResult bindingResult, HttpServletRequest request) {
-		return tokenService.forgottenPassword(bindingResult, usersDto.getEmail(), request.getRequestURL().toString());
+		return forgottenPasswordService.forgottenPassword(bindingResult, usersDto.getEmail(), request.getRequestURL().toString());
 	}
 
 	@RequestMapping(value = "/forgotten-pass/{username}/{token}", method = RequestMethod.GET)
