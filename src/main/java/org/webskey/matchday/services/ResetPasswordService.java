@@ -86,7 +86,7 @@ public class ResetPasswordService {
 		
 		deleteToken(usersDto.getUsername());		
 
-		return new ModelAndView("info", "info", "Your password is changed, you can now login with new password.");
+		return new ModelAndView("info", "info", "Your password is changed, you can now log in with new password.");
 	}
 	
 	public void saveUserWithChangedPassword(UsersDto usersDto) {
