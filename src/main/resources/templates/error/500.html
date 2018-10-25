@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>500</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head th:insert="layouts/header :: head-fragment">
 </head>
 <body>
-<div th:replace="layouts/header :: header"></div>
-	<h1>INTERNAL SERVER ERROR</h1>
+	<header th:replace="layouts/header :: header"></header>
+	
+	<div id="info-container">
+		<p id="info">500 Internal Server Error</p>
+	</div>
 </body>
 </html>

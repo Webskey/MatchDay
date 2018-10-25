@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>404</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head th:insert="layouts/header :: head-fragment">
 </head>
 <body>
-	<h1>405 co ty kombinujesz cwaniaczku?</h1>
-	<a href='/'>Home Page</a>
+	<header th:replace="layouts/header :: header"></header>
+	
+	<div id="info-container">
+		<p id="info">405 Method Not Allowed</p>
+	</div>
 </body>
 </html>
