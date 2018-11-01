@@ -5,10 +5,12 @@ import org.thymeleaf.context.Context;
 public class ResetPasswordMessage implements HtmlMessage {
 
 	private String email;
-	private String link;
+	private String username;
+	private String link;	
 
-	public ResetPasswordMessage(String email, String link) {	
+	public ResetPasswordMessage(String email, String username, String link) {	
 		this.email = email;
+		this.username = username;
 		this.link = link;
 	}
 
@@ -28,13 +30,10 @@ public class ResetPasswordMessage implements HtmlMessage {
 	}
 
 	@Override
-	public Context getContext() {
-		/*
-		String message = "Hello  + user.getUsername() +  here is the link to reset your old password:\n" + link
-				+ "\n\n If you didnt ask for reseting your password just ingore this email or contact website administration";
-		 */
+	public Context getContext() {	
 		Context context = new Context();
 		context.setVariable("link", link);
+		context.setVariable("username", username);
 		return context;
 	}
 

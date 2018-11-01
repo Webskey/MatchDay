@@ -1,12 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>403</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head th:insert="layouts/header :: head-fragment">
 </head>
 <body>
-	<div th:replace="layouts/header :: header"></div>
-	<h2>Hi</h2>
-	<h2 th:text="${name}">Information</h2>
+	<header class="header-class" th:fragment="header-fragment">
+		<div id="logo-container">
+			<a href="/"><img id="logo-img" alt="logo" src="https://i.imgur.com/6Q4AhT8.png"></a>
+	</div>
+	</header>
+	
+	<p>Hello, <span th:text="${name}">username</span>!
+	<br><br>Welcome to our website, we are glad that you joined us.
+	<br> You can log in with your username and password in order to buy tickets for a game that you want to watch.
+	<br>
+	<br>
+	<p align="right">Regards, Matchday</p>
 </body>
 </html>

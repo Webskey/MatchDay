@@ -57,7 +57,7 @@ public class ForgottenPasswordService {
 		logger.info("Token reset password made for user: " + usersEntity.getUsername());
 		
 		saveToken(usersEntity.getUsername(), token);
-		emailService.sendHtmlEmail(new ResetPasswordMessage(email, link));
+		emailService.sendHtmlEmail(new ResetPasswordMessage(email, usersEntity.getUsername(), link));
 	}
 	
 	public void saveToken(String username, String token) {
