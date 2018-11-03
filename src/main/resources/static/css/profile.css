@@ -1,0 +1,41 @@
+#profile-container {
+	position: relative;
+	margin: auto;
+	padding: 1%;
+	width: 70%;
+}
+
+#profileform-table {
+	width: 70%;
+	position: relative;
+	margin: auto;
+}
+
+.profile-label {
+	width: 30%;
+	font-size: calc(5px + 1.2vw);
+	padding-top: 15px;
+}
+
+.profile-input {
+	padding-top: 5px;
+}
+
+
+#profile-submit {
+	text-align: right;
+}
+
+#profile-submit-button {
+	min-width: 70px;
+}
+
+#change-password{
+	position:relative;
+	margin:auto;
+	width: 50%;
+}
+
+#change-password-button{
+	width:100%;
+}

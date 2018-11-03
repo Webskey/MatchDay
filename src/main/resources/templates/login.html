@@ -10,7 +10,7 @@
 	<div id="login-container">
 		<h1>Login</h1>
 
-		<p th:if="${loginError}">Wrong user or password</p>
+		<p id="error-info" th:if="${loginError}">Wrong user or password</p>
 		<form th:action="@{/login}" method="post" th:fragment="login">
 
 			<table id="loginform-table">
