@@ -30,7 +30,7 @@
 					<td class="profile-input"><input type="text" class="form-control" th:field="*{lastname}" name="lastname" /></td>
 				</tr>
 				<tr>
-					<td class="profile-label">Email</td>
+					<td class="profile-label">Email:</td>
 					<td class="profile-input"><input type="text" class="form-control" th:field="*{email}" name="email" /></td>
 					<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
 						error Error</td>
