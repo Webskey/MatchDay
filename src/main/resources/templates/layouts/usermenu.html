@@ -8,14 +8,14 @@
 <body>
 	<nav class="usermenu-nav" th:fragment="usermenu-fragment">			
 			<ul class="usermenu" sec:authorize="isAuthenticated()">
-				<li><a href="/profile"> <i>You're logged as: <b><span sec:authentication="name">username</span></b></i></a></li> 				
-    			<li><a href="/profile">PROFILE</a></li>
-   				<li><a href="/logout">LOGOUT</a></li> 				
+				<li><a id="um-loggedas-btn" href="/profile"> <i>You're logged as: <b><span sec:authentication="name">username</span></b></i></a></li> 				
+    			<li><a id="um-profile-btn" href="/profile">PROFILE</a></li>
+   				<li><a id="um-logout-btn" href="/logout">LOGOUT</a></li> 				
   			</ul>
   			
 			<ul class="usermenu" sec:authorize="!isAuthenticated()">				
-    			<li><a href="/login">LOGIN</a></li>
-   				<li><a href="/register">REGISTER</a></li> 				
+    			<li><a id="um-login-btn" href="/login">LOGIN</a></li>
+   				<li><a id="um-register-btn" href="/register">REGISTER</a></li> 				
   			</ul>
 	</nav>
 	<!-- 

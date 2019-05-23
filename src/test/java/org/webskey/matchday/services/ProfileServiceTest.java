@@ -1,4 +1,4 @@
-package org.webskey.matchday.service;
+package org.webskey.matchday.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
