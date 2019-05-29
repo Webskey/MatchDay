@@ -2,6 +2,7 @@ package org.webskey.matchday.it;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
+import org.webskey.matchday.pageobjects.BrowserDriver;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -13,6 +14,6 @@ public class TestRunner {
 	
 	@AfterClass
 	public static void shutDown() {
-		//BrowserDriver.INSTANCE.getWebDriver().quit();
+		BrowserDriver.INSTANCE.getWebDriver().quit();
 	}
 }

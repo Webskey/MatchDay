@@ -10,6 +10,7 @@ Feature: Login
     And I fill password field with
      | pass |
      | boss |
+    And I submit
     Then I am logged in to Matchday 
     
   Scenario: Unsuccessful loging in to Matchday
@@ -20,4 +21,5 @@ Feature: Login
     And I fill password field with
      | psswrd |
      | 123frytki |
+    And I submit
     Then I am not logged in to Matchday 
